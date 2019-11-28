@@ -1,6 +1,18 @@
+/**
+ * Count number of pieces a player has played.
+ *
+ * @param {number} bitboard - Bitboard representing a player
+ * @return {number} Number of pieces played
+ */
 const countPieces = bitboard =>
   bitboard.toString(2).split("").filter(x => x === "1").length;
 
+/**
+ * Heuristic used for negamax, counts number of spaces each player can win.
+ *
+ * @param {object} board - The board.
+ * @return {number} Number of winning spaces for current player.
+ */
 const countWinningSpaces = board => {
   const player = board.currentTurn;
   let winningSpaces = 0;
@@ -21,6 +33,12 @@ const countWinningSpaces = board => {
   return winningSpaces;
 }
 
+/**
+ * Assign a score to the current board from the current player's perspective.
+ *
+ * @param {object} board - The board.
+ * @return {number} Score for the board.
+ */
 const evaluate = board => {
   const player = board.currentTurn;
   const opponent = player ^ 1;
@@ -28,7 +46,6 @@ const evaluate = board => {
   const oCount = countPieces(board.bitboard[opponent]);
   if (board.isWin(player)) {
     return (22 - pCount) * 10;
-
   }
   if (board.isWin(opponent)) {
     return (oCount - 22) * 10;
@@ -39,6 +56,16 @@ const evaluate = board => {
 
 const table = new TranspositionTable();
 
+/**
+ * Negamax implementation of minimax with alpha beta pruning and transposition tables.
+ *
+ * @param {object} node - The board.
+ * @param {number} depth - How deep to search.
+ * @param {number} alpha - Alpha value.
+ * @param {number} beta - Beta value.
+ * @param {object} time - Time limit.
+ * @return {array} The best move and score for that move.
+ */
 const negamax = (node, depth, alpha, beta, time = {timeLimit: 0}) => {
   // console.log("negamax", node.moveString(), depth, alpha, beta)
   const alphaO = alpha;
@@ -93,7 +120,13 @@ const negamax = (node, depth, alpha, beta, time = {timeLimit: 0}) => {
 
   return [bestMove, bestValue];
 }
-
+/**
+ * Calculate best move for a given board, using minimax and iterative deepening.
+ *
+ * @param {object} board - The board.
+ * @param {number} [timeLimit=1000] - Time limit for iterative deepening.
+ * @return {number} Best move found.
+ */
 const getBestMove = (board, timeLimit = 1000) => {
   // minimax algorithm (negamax) with iterative deepening
   const maxDepth = 42 - board.moves.length;
