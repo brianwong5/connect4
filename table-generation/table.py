@@ -45,9 +45,5 @@ for string in comb:
     hi = max(score)
     score = map(lambda x: -1 if x == 100 else x, score)
     indices = [str(i) for i in map(lambda x: x if score[x] == hi else -1, range(len(score))) if i != -1]
-    # print(url)
-    # print(score)
-    # print(hi)
-    # print(indices)
     print('"' + string + '":' + str(indices) + ",")
 print("}")
