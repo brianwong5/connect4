@@ -1,10 +1,3 @@
-// https://github.com/PascalPons/connect4/blob/part12/solver.cpp
-// might look into this later
-
-// https://github.com/MarkusThill/Connect-Four/blob/master/CFour/src/openingBook/BookSum.java
-// https://github.com/MarkusThill/Connect-Four/blob/master/CFour/src/openingBook/Book.java
-// opening book
-
 const countPieces = bitboard =>
   bitboard.toString(2).split("").filter(x => x === "1").length;
 
