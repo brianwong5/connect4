@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+}
+
+/* .container {
+  width: 100vw;
+  height: 100vh;
+} */
+
+#board {
+  position: relative;
+  display: grid;
+  min-width: 210px;
+  max-width: 90vh;
+  grid-template: repeat(6, 1fr) / repeat(7, 1fr);
+}
+
+#info {
+  padding: 10px;
+}
+
+.cell {
+  background: radial-gradient(transparent 55%, blue 10%);
+  padding-top: 100%;
+}
+
+.disc {
+  position: absolute;
+  width: calc(100% / 7);
+  padding-top: calc(100% / 7);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.red {
+  background-color: red;
+}
+
+.yellow {
+  background-color: gold;
+}
